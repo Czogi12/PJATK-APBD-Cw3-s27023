@@ -217,7 +217,12 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie13_GrupowanieZapisowWedlugPrzedmiotu()
     {
-        return 
+        return DaneUczelni.Przedmioty.GroupJoin(
+            DaneUczelni.Zapisy,
+            (przedmiot => przedmiot.Id),
+            zapis => zapis.PrzedmiotId,
+            (przedmiot, enumerable) => $"{przedmiot.Nazwa} {enumerable.Count()}"
+        );
     }
 
     /// <summary>
